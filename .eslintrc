@@ -41,6 +41,8 @@
         "component": true,
         "html": false
       }
-    ]
+    ],
+    "react/prop-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   }
 }
