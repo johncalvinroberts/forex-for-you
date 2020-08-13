@@ -1,6 +1,8 @@
 import React, { FC, StrictMode } from 'react';
 import { Route, Switch } from 'wouter';
+import { Provider } from 'react-redux';
 import { Root, Settings, NotFound } from '../pages';
+import store from '../store';
 import Theme from './Theme';
 
 /**
@@ -14,19 +16,21 @@ import Theme from './Theme';
 const App: FC = () => {
   return (
     <StrictMode>
-      <Theme>
-        <Switch>
-          <Route path="/">
-            <Root />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </Theme>
+      <Provider store={store}>
+        <Theme>
+          <Switch>
+            <Route path="/">
+              <Root />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </Theme>
+      </Provider>
     </StrictMode>
   );
 };
