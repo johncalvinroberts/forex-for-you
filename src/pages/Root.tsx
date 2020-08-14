@@ -1,20 +1,27 @@
-import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, toggleColorMode } from '../store';
+/** @jsx jsx */
+import { FC } from 'react';
+import { jsx, css } from '@emotion/core';
+import { Flex } from '../components';
 
 const Root: FC = () => {
-  const dispatch = useDispatch();
-
-  const colorMode = useSelector((state: RootState) => state.system.colorMode);
-  const handleClick = () => {
-    dispatch(toggleColorMode());
-  };
-
   return (
     <div>
-      <div>the current color: {colorMode}</div>
-      <div>
-        <button onClick={handleClick}>click meh</button>
+      <Flex
+        css={css`
+          min-height: 200px;
+          border: solid 1px var(--muted);
+          margin-bottom: var(--med);
+        `}
+      >
+        <div>chart here</div>
+      </Flex>
+      <div
+        css={css`
+          min-height: 200px;
+          border: solid 1px var(--muted);
+        `}
+      >
+        data here
       </div>
     </div>
   );

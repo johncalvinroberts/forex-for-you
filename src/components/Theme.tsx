@@ -20,7 +20,7 @@ export const theme = {
     },
     light: {
       background: `hsl(10,10%,98%)`,
-      muted: `hsl(10,20%,94%)`,
+      muted: `hsl(0deg 0% 84%)`,
       error: `#ff4c4c`,
       text: `hsl(10,20%,20%)`,
     },

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Root, Settings, NotFound } from '../pages';
 import store from '../store';
 import Theme from './Theme';
-
+import Layout from './Layout';
 /**
  * App - main entry point of our frontend application
  *
@@ -18,17 +18,19 @@ const App: FC = () => {
     <StrictMode>
       <Provider store={store}>
         <Theme>
-          <Switch>
-            <Route path="/">
-              <Root />
-            </Route>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
+          <Layout>
+            <Switch>
+              <Route path="/">
+                <Root />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          </Layout>
         </Theme>
       </Provider>
     </StrictMode>
