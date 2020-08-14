@@ -16,6 +16,7 @@ const DateItem = ({ value, date, symbol }) => {
         text-align: left;
         padding: var(--smol) 0;
         flex: 0 0 100px;
+        color: var(--text);
       `}
       title={`Value of ${symbol} on ${date}: ${value}`}
     >
@@ -57,6 +58,7 @@ const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
           css={css`
             padding: var(--xsmol);
             background-color: var(--background);
+            color: var(--text);
           `}
         >
           {symbol}

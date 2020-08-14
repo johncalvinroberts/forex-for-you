@@ -46,6 +46,7 @@ const HistoricalExchangeRates = () => {
         border: solid 1px var(--muted);
         margin: var(--med) 0;
         padding: var(--med);
+        color: var(--text);
       `}
     >
       <div
