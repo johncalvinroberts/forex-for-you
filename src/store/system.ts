@@ -11,9 +11,9 @@ const REMOVE_CURRENCY = 'REMOVE_CURRENCY';
 
 // initial state shape
 const defaultState: SystemState = {
-  refreshInterval: 5000,
+  refreshInterval: 30000,
   baseCurrency: 'USD',
-  currencies: ['USD', 'JPY', 'CNY', 'EUR'],
+  preferredSymbols: ['USD', 'JPY', 'CNY', 'EUR'],
   colorMode: 'light',
 };
 const preloadedState: SystemState = JSON.parse(localStorage.getItem(PERSIST_KEY));
@@ -29,31 +29,32 @@ export const removeCurrency = (value) => typedAction(REMOVE_CURRENCY, value);
 // selectors ~~~~
 export const getSystem = (state) => state.system;
 
+// the reducer, main thing here
 export default (state = initialState, action): SystemState => {
-  let nextState = state;
+  let update = {};
   switch (action.type) {
     case TOGGLE_COLOR_MODE:
       const nextColor = state.colorMode === 'light' ? 'dark' : 'light';
-      nextState = { ...state, colorMode: nextColor };
+      update = { colorMode: nextColor };
       break;
     case SET_BASE_CURRENCY:
-      nextState = { ...state, baseCurrency: action.payload };
+      update = { baseCurrency: action.payload };
       break;
     case SET_REFRESH_INTERVAL:
-      nextState = { ...state, refreshInterval: action.payload };
+      update = { refreshInterval: action.payload };
       break;
     case ADD_CURRENCY:
-      nextState = { ...state, currencies: [...state.currencies, action.payload] };
+      update = { preferredSymbols: [...state.preferredSymbols, action.payload] };
       break;
     case REMOVE_CURRENCY:
-      nextState = {
-        ...state,
-        currencies: state.currencies.filter((item) => item !== action.payload),
+      update = {
+        preferredSymbols: state.preferredSymbols.filter((item) => item !== action.payload),
       };
       break;
     default:
       break;
   }
+  const nextState = { ...state, ...update };
   localStorage.setItem(PERSIST_KEY, JSON.stringify(nextState));
   return nextState;
 };

@@ -1,18 +1,23 @@
 type SystemState = {
   refreshInterval: number;
   baseCurrency: string;
-  currencies: string[];
+  preferredSymbols: string[];
   colorMode: string;
 };
 
-type CurrencyDayItemType = {
-  id: string;
-  exchangeRate: number;
-  baseValue: number;
-  error: unknown; // presume this goes here, if we have to fetch individual day items
-};
+// an individual currency entry is called a "currency slice"
+// each is formatted as, [symbol]: <exchange rate>
+type ExchangeRateSlice = Record<string, number>;
 
-type CurrencyItemType = {
-  id: string;
-  days: CurrencyDayItemType[];
+type CurrenciesState = {
+  historical: Record<string, ExchangeRateSlice>;
+  latest: ExchangeRateSlice;
+  errors: unknown[];
+  historicalStartDate?: Date;
+  historicalEndDate?: Date;
+  latestDate?: Date;
+  historicalFetchedAt?: Date;
+  isHistoricalFetching: boolean;
+  latestFetchedAt?: Date;
+  isLatestFetching: boolean;
 };

@@ -108,6 +108,8 @@ const Layout: FC = ({ children }) => {
       <main
         css={css`
           padding: var(--med) var(--xlrg);
+          max-width: 1000px;
+          margin: 0 auto;
         `}
       >
         {children}

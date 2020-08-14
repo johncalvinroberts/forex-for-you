@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { FC } from 'react';
 import { jsx, css } from '@emotion/core';
-import { Flex } from '../components';
+import { Flex, HistoricalExchangeRates, LatestExchangeRates } from '../components';
 
 const Root: FC = () => {
   return (
@@ -15,14 +15,8 @@ const Root: FC = () => {
       >
         <div>chart here</div>
       </Flex>
-      <div
-        css={css`
-          min-height: 200px;
-          border: solid 1px var(--muted);
-        `}
-      >
-        data here
-      </div>
+      <LatestExchangeRates />
+      <HistoricalExchangeRates />
     </div>
   );
 };

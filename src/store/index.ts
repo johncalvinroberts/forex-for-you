@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import system from './system';
 import currencies from './currencies';
 export * from './system';
+export * from './currencies';
 
 /**
  * some helpers - allows us to use typical redux action, but with some nice type inference
@@ -19,13 +20,20 @@ export function typedAction(type: string, payload?: any) {
 
 /**
  * logs all actions and states after they are dispatched.
+ *
+ * ONLY FOR DEVELOPMENT
+ *
+ * first line of this function disables this in production env
  */
 const logger = (store) => (next) => (action) => {
+  if (process.env.NODE_ENV !== 'development') return;
   console.group(action.type);
   console.info('dispatching', action);
   const result = next(action);
-  console.log('next state', store.getState());
+  const nextGlobalState = store.getState();
+  console.log('next state');
   console.groupEnd();
+  window['__state'] = nextGlobalState;
   return result;
 };
 
