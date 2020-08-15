@@ -15,7 +15,7 @@ const HistoricalRatesChart = ({ width, height }) => {
 
   return (
     <LineChart
-      width={width}
+      width={width - 30}
       height={height}
       data={data}
       margin={{

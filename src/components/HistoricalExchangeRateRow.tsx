@@ -1,14 +1,17 @@
 /** @jsx jsx */
+import { useState, useRef, FC, MouseEvent, Fragment } from 'react';
 import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getSymbolHistoricalData } from '../store';
+import Modal from './Modal';
+import Button from './Button';
+import Field from './Field';
 
 const isEqual = (prevState, nextState): boolean => {
   return nextState.currencies.historicalFetchedAt === prevState.currencies.historicalFetchedAt;
 };
 
-const DateItem = ({ value, date, symbol }) => {
+const DateItem = ({ value, date, symbol, baseValue }) => {
   return (
     <div
       css={css`
@@ -20,7 +23,7 @@ const DateItem = ({ value, date, symbol }) => {
       `}
       title={`Value of ${symbol} on ${date}: ${value}`}
     >
-      {value}
+      {value * baseValue}
     </div>
   );
 };
@@ -28,7 +31,23 @@ const DateItem = ({ value, date, symbol }) => {
 type Props = { symbol: string };
 
 const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [baseValue, setBaseValue] = useState(1);
+  const inputRef = useRef<HTMLInputElement>();
   const historicalData = useSelector((state) => getSymbolHistoricalData(symbol, state), isEqual);
+
+  const handleClickRow = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    e.stopPropagation();
+    const nextBaseValue = parseInt(inputRef.current.value);
+    if (baseValue !== nextBaseValue && !isNaN(nextBaseValue)) {
+      setBaseValue(nextBaseValue);
+    }
+    setIsOpen(false);
+  };
 
   return (
     <div
@@ -44,6 +63,7 @@ const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
           background-color: var(--muted);
         }
       `}
+      onClick={handleClickRow}
       title="Inspect single exchange rate row"
     >
       <div
@@ -64,12 +84,30 @@ const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
             font-weight: bold;
           `}
         >
-          {symbol}
+          {symbol} x {baseValue}
         </span>
       </div>
       {historicalData.map(([date, value]) => (
-        <DateItem value={value} key={date} date={date} symbol={symbol} />
+        <DateItem value={value} key={date} date={date} symbol={symbol} baseValue={baseValue} />
       ))}
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <Fragment>
+          <div>
+            <h2>Change Base Value</h2>
+            <Field>
+              <input type="number" min={1} ref={inputRef} defaultValue={baseValue} />
+            </Field>
+          </div>
+          <div
+            css={css`
+              display: flex;
+              justify-content: flex-end;
+            `}
+          >
+            <Button onClick={handleClose}>Close</Button>
+          </div>
+        </Fragment>
+      </Modal>
     </div>
   );
 };

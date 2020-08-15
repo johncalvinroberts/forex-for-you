@@ -11,23 +11,7 @@ import {
   setPreferredSymbols,
   resetCurrenciesState,
 } from '../store';
-
-const Field = ({ children }) => (
-  <fieldset
-    css={css`
-      margin: var(--smol) 0;
-      & > input {
-        border: solid 1px var(--muted);
-        padding: var(--smol);
-      }
-      & > label {
-        margin-right: var(--xsmol);
-      }
-    `}
-  >
-    {children}
-  </fieldset>
-);
+import { Button, Field } from '../components';
 
 const Settings: FC = () => {
   const [formPreferredSymbols, setFormPreferredSymbols] = useState([]);
@@ -137,21 +121,7 @@ const Settings: FC = () => {
             </div>
           ))}
         </Field>
-        <button
-          css={css`
-            background: var(--text);
-            color: var(--background);
-            padding: var(--smol);
-            border: none;
-            cursor: pointer;
-            &:hover {
-              opacity: 0.8;
-            }
-          `}
-          type="submit"
-        >
-          Submit
-        </button>
+        <Button>Submit</Button>
       </form>
     </div>
   );

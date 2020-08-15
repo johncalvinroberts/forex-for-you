@@ -25,7 +25,7 @@ const Layout: FC = ({ children }) => {
           position: sticky;
           padding: var(--xsmol) var(--xlrg);
           top: 0;
-          z-index: 99;
+          z-index: 10;
           border-bottom: solid 1px var(--muted);
         `}
       >

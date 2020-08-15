@@ -7,3 +7,6 @@ export { default as LatestExchangeRates } from './LatestExchangeRates';
 export { default as HistoricalExchangeRates } from './HistoricalExchangeRates';
 export { default as Spinner } from './Spinner';
 export { default as HistoricalRatesChart } from './HistoricalRatesChart';
+export { default as Modal } from './Modal';
+export { default as Button } from './Button';
+export { default as Field } from './Field';
