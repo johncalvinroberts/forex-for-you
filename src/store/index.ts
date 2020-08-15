@@ -26,14 +26,18 @@ export function typedAction(type: string, payload?: any) {
  * first line of this function disables this in production env
  */
 const logger = (store) => (next) => (action) => {
-  if (process.env.NODE_ENV !== 'development') return;
-  console.group(action.type);
-  console.info('dispatching', action);
+  const shouldLog = process.env.NODE_ENV === 'development';
+  if (shouldLog) {
+    console.group(action.type);
+    console.info('dispatching', action);
+  }
   const result = next(action);
   const nextGlobalState = store.getState();
-  console.log('next state');
-  console.groupEnd();
-  window['__state'] = nextGlobalState;
+  if (shouldLog) {
+    console.log('next state');
+    console.groupEnd();
+    window['__state'] = nextGlobalState;
+  }
   return result;
 };
 

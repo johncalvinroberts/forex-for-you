@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "parcel build src/index.html",
-    "postbuild": "react-snap",
+    "//postbuild": "react-snap",
     "start": "parcel serve src/index.html",
     "lint": "eslint . --fix --ignore-path .gitignore && prettier . --write --ignore-path .gitignore"
   },
