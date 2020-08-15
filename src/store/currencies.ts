@@ -46,7 +46,7 @@ export const loadHistoricalRates = () => async (dispatch, getState) => {
   } = getState();
   try {
     const historicalEndDate = dayjs().subtract(1, 'day');
-    const historicalStartDate = dayjs().subtract(30, 'day');
+    const historicalStartDate = dayjs().subtract(1, 'month').subtract(1, 'day');
     // start fetching
     dispatch({
       type: INIT_LOAD_RATES,
@@ -99,6 +99,12 @@ export const getHistorical = (state) => {
   return { historical, fetchedAt, historicalStartDate, historicalEndDate, isFetching };
 };
 
+export const getOrderedDateKeys = (historical) => {
+  return Object.keys(historical).sort(
+    (a, b) => dayjs(a).toDate().valueOf() - dayjs(b).toDate().valueOf(),
+  );
+};
+
 export const getSymbolHistoricalData = (symbol, state) => {
   const { historical } = getHistorical(state);
   const symbolHistoricalData = Object.keys(historical).map((date) => {
@@ -110,7 +116,8 @@ export const getSymbolHistoricalData = (symbol, state) => {
 
 export const getHistoricalDates = (state) => {
   const { historical } = state.currencies;
-  return Object.keys(historical).map((item) => dayjs(item).format('MM/DD'));
+  const orderedDates = getOrderedDateKeys(historical);
+  return orderedDates.map((item) => dayjs(item).format('MM/DD'));
 };
 
 // default state -- if the state is stored in local storage, use that one as our initial state

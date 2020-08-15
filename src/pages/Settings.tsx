@@ -11,7 +11,7 @@ import {
   setPreferredSymbols,
   resetCurrenciesState,
 } from '../store';
-import { Button, Field } from '../components';
+import { Button, Field, mq } from '../components';
 
 const Settings: FC = () => {
   const [formPreferredSymbols, setFormPreferredSymbols] = useState([]);
@@ -66,6 +66,10 @@ const Settings: FC = () => {
         display: flex;
         justify-content: center;
         padding: var(--smol);
+        ${mq[1]} {
+          border: none;
+          padding-bottom: var(--med);
+        }
       `}
     >
       <form onSubmit={handleSubmit}>

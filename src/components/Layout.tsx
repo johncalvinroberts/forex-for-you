@@ -5,6 +5,7 @@ import { Link } from 'wouter';
 import { useDispatch } from 'react-redux';
 import { toggleColorMode } from '../store';
 import Flex from './Flex';
+import { mq } from './Theme';
 
 const Layout: FC = ({ children }) => {
   const dispatch = useDispatch();
@@ -110,6 +111,9 @@ const Layout: FC = ({ children }) => {
           padding: var(--med) var(--xlrg);
           max-width: 1000px;
           margin: 0 auto;
+          ${mq[1]} {
+            padding: 0;
+          }
         `}
       >
         {children}

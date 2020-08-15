@@ -6,6 +6,7 @@ import { loadLatestRates } from '../store';
 import { useInterval, useLatest, useSystem } from '../hooks';
 import { DATETIME_FORMAT } from '../constants';
 import Spinner from './Spinner';
+import { mq } from './Theme';
 
 const SymbolBox = ({ symbol, value }) => {
   return (
@@ -44,6 +45,11 @@ const LatestExchangeRates = () => {
         border: solid 1px var(--muted);
         margin: var(--med) 0;
         padding: var(--med);
+        ${mq[1]} {
+          border: none;
+          border-bottom: solid 1px var(--muted);
+          padding-top: 0;
+        }
       `}
     >
       <div

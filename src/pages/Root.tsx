@@ -9,21 +9,21 @@ const Root: FC = () => {
   return (
     <Fragment>
       <LatestExchangeRates />
-      <div
-        css={css`
-          min-height: 400px;
-          border: solid 1px var(--muted);
-          align-items: center;
-          display: flex;
-          width: 100%;
-          justify-content: center;
-          padding: var(--smol) 0;
-        `}
-        ref={boxRef}
-      >
-        <HistoricalRatesChart width={width} height={400} />
-      </div>
-      <HistoricalExchangeRates />
+      <HistoricalExchangeRates>
+        <div
+          css={css`
+            min-height: 400px;
+            align-items: center;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding: var(--smol) 0;
+          `}
+          ref={boxRef}
+        >
+          <HistoricalRatesChart width={width} height={400} />
+        </div>
+      </HistoricalExchangeRates>
     </Fragment>
   );
 };

@@ -1,15 +1,16 @@
 /** @jsx jsx */
+import { useEffect, FC } from 'react';
 import { jsx, css } from '@emotion/core';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { useHistorical, useSystem, useWhyDidYouUpdate } from '../hooks';
 import { loadHistoricalRates, getHistoricalDates } from '../store';
 import { DATETIME_FORMAT } from '../constants';
 import Spinner from './Spinner';
 import HistoricalExchangeRateRow from './HistoricalExchangeRateRow';
+import { mq } from './Theme';
 
-const HistoricalExchangeRates = () => {
+const HistoricalExchangeRates: FC = ({ children }) => {
   const dispatch = useDispatch();
   const { fetchedAt, isFetching, historicalEndDate, ...rest } = useHistorical();
   const { preferredSymbols, baseCurrency } = useSystem();
@@ -47,6 +48,10 @@ const HistoricalExchangeRates = () => {
         margin: var(--med) 0;
         padding: var(--med);
         color: var(--text);
+        ${mq[1]} {
+          border: none;
+          padding-top: 0;
+        }
       `}
     >
       <div
@@ -73,6 +78,7 @@ const HistoricalExchangeRates = () => {
           {fetchedAt && `Last Updated: ${formattedDate}`} {isFetching && <Spinner />}
         </span>
       </div>
+      {children}
       <div
         css={css`
           padding-top: var(--med);

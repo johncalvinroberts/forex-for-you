@@ -1,6 +1,7 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import React, { useMemo } from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { useHistorical, useSystem } from '../hooks';
+import { getOrderedDateKeys } from '../store';
 
 const colors = ['#82ca9d', '#FF4848', '#a920ff', '#4dff20', '#284670', '#A5E1FA', '#17a2b8'];
 
@@ -11,21 +12,23 @@ const HistoricalRatesChart = ({ width, height }) => {
     symbol: item,
     color: colors[index],
   }));
-  const data = Object.keys(historical).map((date) => ({ date, ...historical[date] }));
+  const data = useMemo(
+    () => getOrderedDateKeys(historical).map((date) => ({ date, ...historical[date] })),
+    [historical],
+  );
 
   return (
     <LineChart
-      width={width - 30}
+      width={width}
       height={height}
       data={data}
       margin={{
         top: 5,
-        right: 30,
-        left: 20,
+        right: 4,
+        left: 0,
         bottom: 5,
       }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="date" />
       <YAxis />
       <Tooltip />
