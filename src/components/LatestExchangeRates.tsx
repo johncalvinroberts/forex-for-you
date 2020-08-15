@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import { loadLatestRates } from '../store';
 import { useInterval, useLatest, useSystem } from '../hooks';
-import { DATETIME_FORMAT } from '../constants';
+import { DATETIME_FORMAT, SYMBOLS_DICT } from '../constants';
 import Spinner from './Spinner';
 import { mq } from './Theme';
 
@@ -24,7 +24,15 @@ const SymbolBox = ({ symbol, value }) => {
       >
         {symbol}
       </div>
-      {value || <Spinner />}
+      <span
+        css={css`
+          font-size: var(--smol);
+          font-weight: normal;
+        `}
+      >
+        {SYMBOLS_DICT[symbol]}
+      </span>
+      <div>{value || <Spinner />}</div>
     </div>
   );
 };

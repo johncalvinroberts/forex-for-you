@@ -65,14 +65,21 @@ const Settings: FC = () => {
         align-items: center;
         display: flex;
         justify-content: center;
-        padding: var(--smol);
+        margin: var(--med) 0;
+        padding: var(--med);
         ${mq[1]} {
           border: none;
-          padding-bottom: var(--med);
+          padding-bottom: calc(var(--med) + 60px);
+          padding-top: 0;
         }
       `}
     >
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        css={css`
+          width: 100%;
+        `}
+      >
         <h3>Settings</h3>
         <Field>
           <label htmlFor="refreshInterval">Refresh Interval</label>
@@ -104,28 +111,52 @@ const Settings: FC = () => {
         </Field>
         <Field>
           <label>Preferred Currencies</label>
-          {ALL_SYMBOLS.map(({ symbol, label }) => (
-            <div
-              key={symbol}
-              css={css`
-                padding: var(--xsmol);
-              `}
-            >
-              <input
-                type="checkbox"
-                id={symbol}
-                name={symbol}
-                checked={formPreferredSymbols.includes(symbol)}
-                onChange={handleChangeSymbol}
+          <div
+            css={css`
+              display: flex;
+              flex-wrap: wrap;
+            `}
+          >
+            {ALL_SYMBOLS.map(({ symbol, label }) => (
+              <div
+                key={symbol}
                 css={css`
-                  margin-right: var(--xsmol);
+                  padding: var(--xsmol);
+                  flex: 0 0 300px;
                 `}
-              />
-              <label htmlFor={symbol}>{label}</label>
-            </div>
-          ))}
+              >
+                <input
+                  type="checkbox"
+                  id={symbol}
+                  name={symbol}
+                  checked={formPreferredSymbols.includes(symbol)}
+                  onChange={handleChangeSymbol}
+                  css={css`
+                    margin-right: var(--xsmol);
+                  `}
+                />
+                <label htmlFor={symbol}>
+                  {label}({symbol})
+                </label>
+              </div>
+            ))}
+          </div>
         </Field>
-        <Button>Submit</Button>
+        <Button
+          css={css`
+            ${mq[1]} {
+              position: fixed;
+              height: 60px;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              text-align: center;
+              width: 100%;
+            }
+          `}
+        >
+          Save
+        </Button>
       </form>
     </div>
   );

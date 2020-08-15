@@ -1,7 +1,12 @@
 /** @jsx jsx */
 import { FC, Fragment } from 'react';
 import { jsx, css } from '@emotion/core';
-import { HistoricalExchangeRates, LatestExchangeRates, HistoricalRatesChart } from '../components';
+import {
+  HistoricalExchangeRates,
+  LatestExchangeRates,
+  HistoricalRatesChart,
+  mq,
+} from '../components';
 import { useDimensions } from '../hooks';
 
 const Root: FC = () => {
@@ -18,6 +23,9 @@ const Root: FC = () => {
             width: 100%;
             justify-content: center;
             padding: var(--smol) 0;
+            ${mq[1]} {
+              padding-bottom: var(--med);
+            }
           `}
           ref={boxRef}
         >

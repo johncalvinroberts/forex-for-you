@@ -30,7 +30,7 @@ const HistoricalRatesChart = ({ width, height }) => {
       }}
     >
       <XAxis dataKey="date" />
-      <YAxis />
+      <YAxis width={30} />
       <Tooltip />
       <Legend />
       {symbolsWithColors.map(({ symbol, color }) => (

@@ -31,6 +31,12 @@ export const ALL_SYMBOLS = [
   { symbol: 'NZD', label: 'New Zealand dollar' },
   { symbol: 'PHP', label: 'Philippine peso	' },
   { symbol: 'SGD', label: 'Singapore dollar	' },
-  { symbol: 'THB', label: 'Thai baht	' },
+  { symbol: 'THB', label: 'Thai baht' },
   { symbol: 'ZAR', label: 'South African rand' },
+  { symbol: 'EUR', label: 'Euro' },
 ];
+
+export const SYMBOLS_DICT = ALL_SYMBOLS.reduce(
+  (memo, current) => ({ ...memo, [current.symbol]: current.label }),
+  {},
+);

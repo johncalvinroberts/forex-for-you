@@ -18,6 +18,8 @@ const HistoricalExchangeRates: FC = ({ children }) => {
 
   const formattedDate = fetchedAt && dayjs(fetchedAt).format(DATETIME_FORMAT);
 
+  const tableWidth = (dates.length + 1) * 100;
+
   useWhyDidYouUpdate('HistoricalExchangeRates', {
     preferredSymbols,
     baseCurrency,
@@ -78,37 +80,45 @@ const HistoricalExchangeRates: FC = ({ children }) => {
           {fetchedAt && `Last Updated: ${formattedDate}`} {isFetching && <Spinner />}
         </span>
       </div>
+      {/* children will probably be "HistoricalRateChart" */}
       {children}
       <div
         css={css`
-          padding-top: var(--med);
           overflow: scroll;
+          width: 100%;
         `}
       >
         <div
           css={css`
-            display: flex;
-            font-size: var(--smol);
-            font-weight: bold;
-            border-bottom: solid 1px var(--muted);
-            & > div {
-              flex: 0 0 100px;
-              text-align: left;
-              padding: var(--med) 0;
-            }
+            padding-top: var(--med);
+            width: ${tableWidth}px;
           `}
         >
-          <div>CURRENCY</div>
-          {dates.map((item) => (
-            <div key={item}>{item}</div>
-          ))}
+          <div
+            css={css`
+              display: flex;
+              font-size: var(--smol);
+              font-weight: bold;
+              border-bottom: solid 1px var(--muted);
+              & > div {
+                flex: 0 0 100px;
+                text-align: left;
+                padding: var(--med) 0;
+              }
+            `}
+          >
+            <div>CURRENCY</div>
+            {dates.map((item) => (
+              <div key={item}>{item}</div>
+            ))}
+          </div>
+          {/* <HistoricalExchangeRateRow symbol={baseCurrency} /> */}
+          {preferredSymbols
+            .filter((item) => item !== baseCurrency)
+            .map((key) => (
+              <HistoricalExchangeRateRow symbol={key} key={key} />
+            ))}
         </div>
-        {/* <HistoricalExchangeRateRow symbol={baseCurrency} /> */}
-        {preferredSymbols
-          .filter((item) => item !== baseCurrency)
-          .map((key) => (
-            <HistoricalExchangeRateRow symbol={key} key={key} />
-          ))}
       </div>
     </div>
   );
