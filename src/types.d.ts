@@ -12,7 +12,6 @@ type ExchangeRateSlice = Record<string, number>;
 type CurrenciesState = {
   historical: Record<string, ExchangeRateSlice>;
   latest: ExchangeRateSlice;
-  errors: unknown[];
   historicalStartDate?: Date;
   historicalEndDate?: Date;
   latestDate?: Date;

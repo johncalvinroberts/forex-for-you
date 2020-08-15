@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { FC, useState, useEffect, useCallback, useRef } from 'react';
 import { jsx, css } from '@emotion/core';
+import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { ALL_SYMBOLS } from '../constants';
 import { useSystem } from '../hooks';
@@ -69,6 +70,7 @@ const Settings: FC = () => {
     if (shouldResetHistoricalData) {
       dispatch(resetCurrenciesState());
     }
+    toast.success('Updated Settings');
   };
 
   return (

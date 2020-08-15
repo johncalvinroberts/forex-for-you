@@ -17,7 +17,7 @@ const SymbolBox = ({ symbol, value }) => {
     >
       <div
         css={css`
-          font-size: var(--smol);
+          font-size: var(--med);
           font-weight: bold;
         `}
       >

@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/redux-thunk": "^2.1.0",
+    "add": "^2.0.6",
     "dayjs": "^1.8.33",
     "eslint-plugin-import": "^2.22.0",
     "micromodal": "^0.4.6",
@@ -22,10 +23,12 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-snap": "^1.23.0",
+    "react-toastify": "^6.0.8",
     "recharts": "^1.8.5",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.9.7",
-    "wouter": "^2.5.1"
+    "wouter": "^2.5.1",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.9.0",

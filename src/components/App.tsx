@@ -1,6 +1,8 @@
 import React, { FC, StrictMode } from 'react';
 import { Route, Switch } from 'wouter';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Root, Settings, NotFound } from '../pages';
 import store from '../store';
 import Theme from './Theme';
@@ -31,6 +33,7 @@ const App: FC = () => {
               </Route>
             </Switch>
           </Layout>
+          <ToastContainer hideProgressBar={true} draggable={false} />
         </Theme>
       </Provider>
     </StrictMode>

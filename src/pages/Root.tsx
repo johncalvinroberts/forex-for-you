@@ -15,12 +15,21 @@ const Root: FC = () => {
           margin-bottom: var(--med);
           align-items: center;
           display: flex;
+          width: 100%;
           justify-content: center;
-          padding: var(--smol) 0;
+          padding: var(--smol);
         `}
-        ref={boxRef}
       >
-        <HistoricalRatesChart width={width} height={400} />
+        <div
+          ref={boxRef}
+          css={css`
+            height: 100%;
+            width: 100%;
+            flex: 0 0 100%;
+          `}
+        >
+          <HistoricalRatesChart width={width} height={400} />
+        </div>
       </div>
       <LatestExchangeRates />
       <HistoricalExchangeRates />

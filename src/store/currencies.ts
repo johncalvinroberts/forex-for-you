@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 import { readHistoricalRates, readLatestRates } from '../api';
 import { typedAction } from './index';
 
@@ -8,14 +9,12 @@ const PERSIST_KEY = 'currencies';
  * types
  */
 const INIT_LOAD_RATES = 'INIT_LOAD_RATES';
-const RECEIVE_ERROR = 'RECEIVE_ERROR';
 const LOAD_RATES_SUCCESS = 'LOAD_RATES_SUCCESS';
 const RESET = 'RESET';
 
 /**
  * action creators
  */
-const receiveError = (payload) => typedAction(RECEIVE_ERROR, payload);
 const loadRatesSuccess = (payload) => typedAction(LOAD_RATES_SUCCESS, payload);
 
 // main important data fetching function/action creator -- loadLatestRates and loadHistoricalRates
@@ -36,7 +35,8 @@ export const loadLatestRates = () => async (dispatch, getState) => {
     // dispatch success
     dispatch(loadRatesSuccess({ latest, isLatestFetching: false, latestFetchedAt: new Date() }));
   } catch (error) {
-    dispatch(receiveError({ error, isLatestFetching: false }));
+    const message: string = error.message || 'Something went wrong';
+    toast.error(message);
   }
 };
 
@@ -68,7 +68,8 @@ export const loadHistoricalRates = () => async (dispatch, getState) => {
       }),
     );
   } catch (error) {
-    dispatch(receiveError({ error, isHistoricalFetching: false }));
+    const message: string = error.message || 'Something went wrong';
+    toast.error(message);
   }
 };
 
@@ -117,7 +118,6 @@ export const getHistoricalDates = (state) => {
 const defaultState: CurrenciesState = {
   historical: {},
   latest: {},
-  errors: [],
   latestDate: null,
   historicalEndDate: null,
   historicalStartDate: null,
@@ -137,10 +137,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case INIT_LOAD_RATES:
       update = { ...action.payload };
-      break;
-    case RECEIVE_ERROR:
-      const { error, ...rest } = action.payload;
-      update = { errors: [...state.errors, error], ...rest };
       break;
     case LOAD_RATES_SUCCESS:
       update = { ...action.payload };

@@ -29,8 +29,9 @@ type Props = { symbol: string };
 
 const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
   const historicalData = useSelector((state) => getSymbolHistoricalData(symbol, state), isEqual);
+
   return (
-    <button
+    <div
       css={css`
         display: flex;
         padding-left: 0;
@@ -59,6 +60,8 @@ const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
             padding: var(--xsmol);
             background-color: var(--background);
             color: var(--text);
+            font-size: var(--med);
+            font-weight: bold;
           `}
         >
           {symbol}
@@ -67,7 +70,7 @@ const HistoricalExchangeRateRow: FC<Props> = ({ symbol }) => {
       {historicalData.map(([date, value]) => (
         <DateItem value={value} key={date} date={date} symbol={symbol} />
       ))}
-    </button>
+    </div>
   );
 };
 

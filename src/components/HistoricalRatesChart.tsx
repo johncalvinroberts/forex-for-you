@@ -5,7 +5,6 @@ import { useHistorical, useSystem } from '../hooks';
 const colors = ['#82ca9d', '#FF4848', '#a920ff', '#4dff20', '#284670', '#A5E1FA', '#17a2b8'];
 
 const HistoricalRatesChart = ({ width, height }) => {
-  console.log({ width, height });
   const { historical } = useHistorical();
   const { preferredSymbols } = useSystem();
   const symbolsWithColors = preferredSymbols.map((item, index) => ({
