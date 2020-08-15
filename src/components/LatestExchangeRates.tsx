@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
-import { loadLatestRates, getSystem } from '../store';
-import { useInterval, useLatest } from '../hooks';
+import { loadLatestRates } from '../store';
+import { useInterval, useLatest, useSystem } from '../hooks';
 import { DATETIME_FORMAT } from '../constants';
 import Spinner from './Spinner';
 
@@ -30,7 +30,7 @@ const SymbolBox = ({ symbol, value }) => {
 
 const LatestExchangeRates = () => {
   const dispatch = useDispatch();
-  const { refreshInterval, preferredSymbols, baseCurrency } = useSelector(getSystem);
+  const { refreshInterval, preferredSymbols, baseCurrency } = useSystem();
   const { latest, fetchedAt, isFetching } = useLatest();
   const formattedDate = fetchedAt && dayjs(fetchedAt).format(DATETIME_FORMAT);
 

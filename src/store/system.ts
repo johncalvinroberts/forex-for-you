@@ -6,8 +6,7 @@ const PERSIST_KEY = 'system';
 const TOGGLE_COLOR_MODE = 'TOGGLE_COLOR_MODE';
 const SET_BASE_CURRENCY = 'SET_BASE_CURRENCY';
 const SET_REFRESH_INTERVAL = 'SET_REFRESH_INTERVAL';
-const ADD_CURRENCY = 'ADD_CURRENCY';
-const REMOVE_CURRENCY = 'REMOVE_CURRENCY';
+const SET_PREFERRED_SYMBOLS = 'SET_PREFERRED_SYMBOLS';
 
 // initial state shape
 const defaultState: SystemState = {
@@ -23,8 +22,7 @@ const initialState: SystemState = preloadedState || defaultState;
 export const toggleColorMode = () => typedAction(TOGGLE_COLOR_MODE);
 export const setBaseCurrency = (value) => typedAction(SET_BASE_CURRENCY, value);
 export const setRefreshInterval = (value) => typedAction(SET_REFRESH_INTERVAL, value);
-export const addCurrency = (value) => typedAction(ADD_CURRENCY, value);
-export const removeCurrency = (value) => typedAction(REMOVE_CURRENCY, value);
+export const setPreferredSymbols = (value) => typedAction(SET_PREFERRED_SYMBOLS, value);
 
 // selectors ~~~~
 export const getSystem = (state) => state.system;
@@ -43,12 +41,9 @@ export default (state = initialState, action): SystemState => {
     case SET_REFRESH_INTERVAL:
       update = { refreshInterval: action.payload };
       break;
-    case ADD_CURRENCY:
-      update = { preferredSymbols: [...state.preferredSymbols, action.payload] };
-      break;
-    case REMOVE_CURRENCY:
+    case SET_PREFERRED_SYMBOLS:
       update = {
-        preferredSymbols: state.preferredSymbols.filter((item) => item !== action.payload),
+        preferredSymbols: action.payload,
       };
       break;
     default:

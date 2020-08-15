@@ -3,8 +3,8 @@ import { jsx, css } from '@emotion/core';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useHistorical, useWhyDidYouUpdate } from '../hooks';
-import { loadHistoricalRates, getSystem, getHistoricalDates } from '../store';
+import { useHistorical, useSystem, useWhyDidYouUpdate } from '../hooks';
+import { loadHistoricalRates, getHistoricalDates } from '../store';
 import { DATETIME_FORMAT } from '../constants';
 import Spinner from './Spinner';
 import HistoricalExchangeRateRow from './HistoricalExchangeRateRow';
@@ -12,7 +12,7 @@ import HistoricalExchangeRateRow from './HistoricalExchangeRateRow';
 const HistoricalExchangeRates = () => {
   const dispatch = useDispatch();
   const { fetchedAt, isFetching, historicalEndDate, ...rest } = useHistorical();
-  const { preferredSymbols, baseCurrency } = useSelector(getSystem);
+  const { preferredSymbols, baseCurrency } = useSystem();
   const dates = useSelector(getHistoricalDates);
 
   const formattedDate = fetchedAt && dayjs(fetchedAt).format(DATETIME_FORMAT);
@@ -30,10 +30,10 @@ const HistoricalExchangeRates = () => {
     // to decide if we should trigger a fetch of new historical data, first we have to check if our historical data is stale
     // to check if it's stale, we see if the "end date" is before yesterday (with 1 minute buffer time, otherwise it will always be stale)
     const yesterday = dayjs().subtract(1, 'day');
-    const historicalDataIsStale = dayjs(historicalEndDate).add(1, 'minute').isBefore(yesterday);
+    const isHistoricalDataStale = dayjs(historicalEndDate).add(1, 'minute').isBefore(yesterday);
     // also, we shiuld fetch if we've never fetched
     // and we should NOT fetch if we are currently fetching
-    const shouldFetch = (!fetchedAt || historicalDataIsStale) && !isFetching;
+    const shouldFetch = (!fetchedAt || isHistoricalDataStale) && !isFetching;
     if (shouldFetch) {
       dispatch(loadHistoricalRates());
     }

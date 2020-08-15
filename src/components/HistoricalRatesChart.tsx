@@ -1,15 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useHistorical } from '../hooks';
-import { getSystem } from '../store';
+import { useHistorical, useSystem } from '../hooks';
 
 const colors = ['#82ca9d', '#FF4848', '#a920ff', '#4dff20', '#284670', '#A5E1FA', '#17a2b8'];
 
 const HistoricalRatesChart = ({ width, height }) => {
   console.log({ width, height });
   const { historical } = useHistorical();
-  const { preferredSymbols } = useSelector(getSystem);
+  const { preferredSymbols } = useSystem();
   const symbolsWithColors = preferredSymbols.map((item, index) => ({
     symbol: item,
     color: colors[index],

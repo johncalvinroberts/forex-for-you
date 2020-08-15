@@ -10,6 +10,7 @@ const PERSIST_KEY = 'currencies';
 const INIT_LOAD_RATES = 'INIT_LOAD_RATES';
 const RECEIVE_ERROR = 'RECEIVE_ERROR';
 const LOAD_RATES_SUCCESS = 'LOAD_RATES_SUCCESS';
+const RESET = 'RESET';
 
 /**
  * action creators
@@ -70,6 +71,8 @@ export const loadHistoricalRates = () => async (dispatch, getState) => {
     dispatch(receiveError({ error, isHistoricalFetching: false }));
   }
 };
+
+export const resetCurrenciesState = () => typedAction(RESET);
 
 // selectors
 export const getLatest = (state) => {
@@ -141,6 +144,9 @@ export default (state = initialState, action) => {
       break;
     case LOAD_RATES_SUCCESS:
       update = { ...action.payload };
+      break;
+    case RESET:
+      update = defaultState;
       break;
     default:
       break;

@@ -5,7 +5,7 @@ import { HistoricalExchangeRates, LatestExchangeRates, HistoricalRatesChart } fr
 import { useDimensions } from '../hooks';
 
 const Root: FC = () => {
-  const [boxRef, { width, height }] = useDimensions();
+  const [boxRef, { width }] = useDimensions();
   return (
     <div>
       <div
@@ -20,7 +20,7 @@ const Root: FC = () => {
         `}
         ref={boxRef}
       >
-        <HistoricalRatesChart width={width} height={height} />
+        <HistoricalRatesChart width={width} height={400} />
       </div>
       <LatestExchangeRates />
       <HistoricalExchangeRates />

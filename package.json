@@ -17,6 +17,7 @@
     "@types/redux-thunk": "^2.1.0",
     "dayjs": "^1.8.33",
     "eslint-plugin-import": "^2.22.0",
+    "micromodal": "^0.4.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
