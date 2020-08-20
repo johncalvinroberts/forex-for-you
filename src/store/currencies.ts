@@ -107,7 +107,8 @@ export const getOrderedDateKeys = (historical) => {
 
 export const getSymbolHistoricalData = (symbol, state) => {
   const { historical } = getHistorical(state);
-  const symbolHistoricalData = Object.keys(historical).map((date) => {
+  const orderedDates = getOrderedDateKeys(historical);
+  const symbolHistoricalData = orderedDates.map((date) => {
     const value = historical[date][symbol];
     return [date, value];
   });
