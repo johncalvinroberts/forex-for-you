@@ -15,7 +15,7 @@
     /* Specify module resolution strategy */
     "moduleResolution": "node",
     /* Base directory to resolve non-absolute module names */
-    "baseUrl": "./src",
+    // "baseUrl": "",
     /* Maps imports to locations - e.g. ~models will go to ./src/models */
     "paths": {
       "~*": ["./*"]
@@ -27,5 +27,5 @@
     /*  Emit interop between CommonJS and ES modules */
     "esModuleInterop": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "api/**/*"]
 }
